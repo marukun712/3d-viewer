@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>vrmビューアー</title>
+<script type="importmap">{"imports": {"three": "https://threejs.org/build/three.module.js"}}</script>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://binzume.github.io/aframe-vrm/dist/aframe-vrm.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+
+</head>
+<style>
+  input{
+    color: white;
+  }
+</style>
+<body style="background-color:#9EA1E7; background-size: cover; background-repeat: no-repeat; " id="body">
+  <a-scene>
+
+    
+    <a-entity id="env">
+      <a-plane id='ground' wireframe='true' width='10' height='10' segments-height='10' segments-width='10' rotation='90 0 0'></a-plane>
+    </a-entity>
+
+    
+    <a-entity id="mouse-cursor" cursor="rayOrigin: mouse; fuse:false" raycaster="objects:.collidable"></a-entity>
+
+    <a-entity id="rig" position="0 -0.1 0" movement-controls="constrainToNavMesh: true; speed:0.1">
+      <a-entity id="camera" position="0 1.6 2" camera look-controls="pointerLockEnabled: false"></a-entity>
+  </a-entity>
+
+  
+    <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea"></a-entity>
+  
+  </a-scene>
+  
+
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 60px" onclick="onskeleton();">
+    skeleton on 
+  </button>
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 120px" onclick="offskeleton();">
+    skeleton off 
+  </button>
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 180px" onclick="onposer();">
+    poser on 
+  </button>
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 240px" onclick="offposer();">
+    poser off 
+  </button>
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 300px" onclick="offplane();">
+    plane off
+  </button>
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 360px" onclick="onplane();">
+    plane on
+  </button>
+  <script>
+    function onskeleton(){
+      document.getElementById('vrmarea').setAttribute("vrm-skeleton",``)
+
+    }
+    function offskeleton(){
+      document.getElementById('vrmarea').removeAttribute("vrm-skeleton")
+
+    }
+    function onposer(){
+      document.getElementById('vrmarea').setAttribute("vrm-poser",`enableConstraints:true`)
+    }
+    function offposer(){
+      document.getElementById('vrmarea').removeAttribute("vrm-poser")
+    }
+    function onplane(){
+  document.getElementById('ground').setAttribute("width","10")
+  document.getElementById('ground').setAttribute("height","10")
+  document.getElementById('ground').setAttribute("position","0 0 0 ")
+
+}
+function offplane(){
+  document.getElementById('ground').setAttribute("position","0 -100000000000000 0")
+  document.getElementById('ground').setAttribute("width","0")
+  document.getElementById('ground').setAttribute("height","0")
+}
+  </script>
+  <p style="z-index: 100; position: absolute; left: 10px; top: 1px; color: white;">vrmモデルファイルを選択</p>
+  <input id="file-sample" type="file" style="z-index: 100; position: absolute; left: 6px; top: 26px" accept=".vrm">
+  <p style="z-index: 100; position: absolute; left: 10px; top: 405px; color: white;">bvhモーションファイルを選択</p>
+  <input id="bvh" type="file" style="z-index: 100; position: absolute; left: 6px; top: 430px" accept=".bvh">
+  <p style="z-index: 100; position: absolute; left: 10px; top: 480px; color: white;">背景画像を選択</p>
+  <input id="bg" type="file" style="z-index: 100; position: absolute; left: 6px; top: 510px" accept=".png,.jpg">
+
+<script>
+  document.getElementById('file-sample').addEventListener('change', function (e) {
+    
+    // 1枚だけ表示する
+    var file = e.target.files[0];
+
+    // ファイルのブラウザ上でのURLを取得する
+    var blobUrl = window.URL.createObjectURL(file);
+
+    
+    document.getElementById('vrmarea').setAttribute("vrm",`src:${blobUrl}`)
+
+});
+
+document.getElementById('bvh').addEventListener('change', function (e) {
+    
+    // 1枚だけ表示する
+    var file = e.target.files[0];
+
+    // ファイルのブラウザ上でのURLを取得する
+    var blobUrl = window.URL.createObjectURL(file);
+
+    
+    document.getElementById('vrmarea').setAttribute("vrm-anim",`src:${blobUrl}`)
+
+});
+
+document.getElementById('bg').addEventListener('change', function (e) {
+    
+    // 1枚だけ表示する
+    var file = e.target.files[0];
+
+    // ファイルのブラウザ上でのURLを取得する
+    var blobUrl = window.URL.createObjectURL(file);
+
+    
+    document.getElementById('body').removeAttribute("style")
+    document.getElementById('body').setAttribute("style",`background-image: url(${blobUrl}); background-size: cover; background-repeat: no-repeat;`)
+});
+</script>
+</body>
+</html>

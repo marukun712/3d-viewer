@@ -1,0 +1,21 @@
+{
+  "name": "3d-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@binzume/aframe-vrm": "^0.2.0",
+    "bulma": "^0.9.3",
+    "express": "^4.17.3",
+    "firebase": "^9.6.7",
+    "multer": "^1.4.4"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.23"
+  }
+}
