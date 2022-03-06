@@ -3,10 +3,10 @@
 <html>
   <head>
     <!-- A-FrameをCDNから読み込む -->
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+<script type="importmap">{"imports": {"three": "https://threejs.org/build/three.module.js"}}</script>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <title>オブジェクトビューアー</title>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="camera.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
@@ -27,9 +27,17 @@
     <a-plane id='ground' wireframe='true' width='100' height='100' segments-height='10' segments-width='10' rotation='90 0 0' position="0 0 0"></a-plane>
   </a-entity>
 
-        <a-entity id="rig" position="1.3 15 1.3" movement-controls="constrainToNavMesh: true; speed:0.5">
-            <a-entity id="camera" position="0 1.6 0" camera look-controls="pointerLockEnabled: false"></a-entity>
-        </a-entity>
+  <a-entity id="mouse-cursor" cursor="rayOrigin: mouse; fuse:false" raycaster="objects:.collidable"></a-entity>
+
+    <a-entity id="camera-rig" position-controls="axismove:x" camera-control="homePosition:0 0 3; vrHomePosition: 0 0 0.5">
+
+      <a-camera look-controls="enabled:false" position="0 1.5 0"></a-camera>
+
+      <a-entity laser-controls="hand: right" id="rightHand" raycaster="objects:.collidable"></a-entity>
+      <a-entity laser-controls="hand: left" id="leftHand" raycaster="objects:.collidable"></a-entity>
+
+
+    </a-entity>
 
     <a-gltf-model  id="test"src="./model/rpg-7.gltf" position="0 0 0" rotation="0 0 0" scale="10 10 10"></a-gltf-model>
     
