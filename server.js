@@ -10,7 +10,7 @@ app.get('/',function(req,res){
 })
 
 app.listen(port,function(){
-    console.log(port+"番で起動")
+    console.log("http://localhost:"+port+"で起動")
 })
   
 
