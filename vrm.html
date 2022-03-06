@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>vrmビューアー</title>
-<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+
 <script type="importmap">{"imports": {"three": "https://threejs.org/build/three.module.js"}}</script>
 <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 <script src="https://binzume.github.io/aframe-vrm/dist/aframe-vrm.js"></script>
@@ -36,7 +36,7 @@
   </a-entity>
 
   
-    <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" position="0 0 -1"></a-entity>
+    <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" position="0 0 -3"></a-entity>
   
   </a-scene>
   
@@ -59,6 +59,10 @@
   <button  style="z-index: 100; position: absolute; left: 10px; top: 360px" onclick="onplane();">
     plane on
   </button>
+  <button  style="z-index: 100; position: absolute; left: 10px; top: 420px" onclick="onmove();">
+    move
+  </button>
+  
   <script>
     function onskeleton(){
       document.getElementById('vrmarea').setAttribute("vrm-skeleton",``)
@@ -85,11 +89,14 @@ function offplane(){
   document.getElementById('ground').setAttribute("width","0")
   document.getElementById('ground').setAttribute("height","0")
 }
+function onmove(){
+  document.getElementById('vrmarea').setAttribute("vrm-anim",`src:./model/la_bvh_sample01.bvh`)
+
+}
   </script>
   <p style="z-index: 100; position: absolute; left: 10px; top: 1px; color: white;">vrmモデルファイルを選択</p>
   <input id="file-sample" type="file" style="z-index: 100; position: absolute; left: 6px; top: 26px" accept=".vrm">
-  <p style="z-index: 100; position: absolute; left: 10px; top: 405px; color: white;">bvhモーションファイルを選択</p>
-  <input id="bvh" type="file" style="z-index: 100; position: absolute; left: 6px; top: 430px" accept=".bvh">
+
   <p style="z-index: 100; position: absolute; left: 10px; top: 480px; color: white;">背景画像を選択</p>
   <input id="bg" type="file" style="z-index: 100; position: absolute; left: 6px; top: 510px" accept=".png,.jpg">
 
@@ -107,18 +114,6 @@ function offplane(){
 
 });
 
-document.getElementById('bvh').addEventListener('change', function (e) {
-    
-    // 1枚だけ表示する
-    var file = e.target.files[0];
-
-    // ファイルのブラウザ上でのURLを取得する
-    var blobUrl = window.URL.createObjectURL(file);
-
-    
-    document.getElementById('vrmarea').setAttribute("vrm-anim",`src:${blobUrl}`)
-
-});
 
 document.getElementById('bg').addEventListener('change', function (e) {
     
