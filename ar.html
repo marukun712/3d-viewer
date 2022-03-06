@@ -6,6 +6,7 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
 <script type="importmap">{"imports": {"three": "https://threejs.org/build/three.module.js"}}</script>
 <script src="https://binzume.github.io/aframe-vrm/dist/aframe-vrm.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
 
 <meta charset="UTF-8">
 
@@ -28,17 +29,17 @@
   </head>
   <body>
 
-    <a-scene >
+    <a-scene>
     
-      <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" scale="1 1 1" position="0 -0.5 -2"></a-entity>
     
-    </a-scene>
-    
-    <a-marker preset="hiro">
-      <!-- マーカーの場所に箱を置く（見やすいようにワイヤーフレーム表示） -->
-      <a-box position="0 0.5 0" wireframe="true"></a-box>
-    </a-marker>
+    <a-entity id="rig" position="0 -0.1 0" movement-controls="constrainToNavMesh: true; speed:0.1">
+      <a-entity id="camera" position="0 1.6 2" camera look-controls="pointerLockEnabled: false"></a-entity>
+  </a-entity>
 
+  <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" scale="1 1 1" position="0 -0.5 -2"></a-entity>
+
+
+  </a-scene>
 
 
     <!--ボタン-->
