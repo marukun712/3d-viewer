@@ -3,17 +3,18 @@
 <html>
 <head>
 <title>vrmビューアー</title>
+<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 <script type="importmap">{"imports": {"three": "https://threejs.org/build/three.module.js"}}</script>
 <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 <script src="https://binzume.github.io/aframe-vrm/dist/aframe-vrm.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="image/icon.jpg">
-  <script src="camera.js"></script>
 </head>
 <style>
   input{
@@ -23,23 +24,18 @@
 <body style="background-color:#9EA1E7; background-size: cover; background-repeat: no-repeat; " id="body">
   <a-scene>
 
-    <a-entity id="mouse-cursor" cursor="rayOrigin: mouse; fuse:false" raycaster="objects:.collidable"></a-entity>
-
-    <a-entity id="camera-rig" position-controls="axismove:x" camera-control="homePosition:0 0 3; vrHomePosition: 0 0 0.5">
-
-      <a-camera look-controls="enabled:false" position="0 1.5 0"></a-camera>
-
-      <a-entity laser-controls="hand: right" id="rightHand" raycaster="objects:.collidable"></a-entity>
-      <a-entity laser-controls="hand: left" id="leftHand" raycaster="objects:.collidable"></a-entity>
-
-
-    </a-entity>
+    
     <a-entity id="env">
       <a-plane id='ground' wireframe='true' width='10' height='10' segments-height='10' segments-width='10' rotation='90 0 0'></a-plane>
     </a-entity>
 
+    
 
+    <a-entity id="rig" position="0 -0.1 0" movement-controls="constrainToNavMesh: true; speed:0.1">
+      <a-entity id="camera" position="0 1.6 2" camera look-controls="pointerLockEnabled: false"></a-entity>
+  </a-entity>
 
+  
     <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" position="0 0 -1"></a-entity>
   
   </a-scene>
