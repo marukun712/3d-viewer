@@ -28,17 +28,18 @@
   </head>
   <body>
 
-    <a-scene>
-    
-    
-    
-    <a-marker preset="hiro">
-      <!-- マーカーの場所に箱を置く（見やすいようにワイヤーフレーム表示） -->
-      <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" scale="1 1 1" position="0 -0.5 -2"></a-entity>
-    </a-marker>
+    <a-scene embedded arjs="debugUIEnabled:false;">
 
-  </a-scene>
+      <!-- マーカーを登録（プリセットされている「hiro」マーカー） -->
+      <a-marker preset="hiro">
+        <!-- マーカーの場所に箱を置く（見やすいようにワイヤーフレーム表示） -->
+        <a-box position="0 0.5 0" wireframe="true"></a-box>
+      </a-marker>
 
+      <!-- AR用のカメラを置く -->
+      <a-entity camera></a-entity>
+
+    </a-scene>
 
     <!--ボタン-->
     <button  style="z-index: 100; position: absolute; left: 10px; top: 60px" onclick="onskeleton();">
