@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-    <title>marker AR</title>
-    <script type="importmap">{"imports": {"three": "https://threejs.org/build/three.module.js"}}</script>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <!-- we import arjs version without NFT but with marker + location based support -->
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="https://binzume.github.io/aframe-vrm/dist/aframe-vrm.js"></script>
-  </head>
-
-  <body style="margin:0px; overflow:hidden;">
-    <a-scene embedded arjs>
-      <a-marker preset="hiro">
-            <a-entity  vrm-anim="" vrm="src:./model/sample.vrm" rotation="0 180 0" id="vrmarea" position="0 0 -1" scale="3 3 3"></a-entity>
-
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
-</html>
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta charset="UTF-8"> 
+    <meta name='viewport' content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'> 
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script> 
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script> 
+  </head> 
+  <body>
+    <model-viewer src="./model/rpg-7.gltf" controls auto-rotate ar></model-viewer> 
+  </body> 
+</html> 
